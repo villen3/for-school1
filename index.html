@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Randomizer</title>
+    <style>
+        #backy {
+            background-image: url(./wallhaven-2yg7v6.png);
+            height: 775px;
+            background-size: 100%;
+        }
+        * {
+            font-family: sans-serif;
+            margin: 0;
+            color: black;
+        }
+        #card {
+            height: 200px;
+            width: 900px;
+            text-align: center;
+            padding: 35px;
+            max-width: 600px;
+            margin-top: 200px;
+            margin-left: 29%;
+            background: rgba(255, 255, 255, 0.07);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 5px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        #head {
+            font-size: 48px;
+            text-align: center;
+            padding-top: 25px;
+            background: rgba(255, 255, 255, 0.07);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 5px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            width: 1200px;
+            height: 100px;
+            margin-left: 10%;
+        }
+        #ul {
+            width: 550px;
+            height: 350px;
+            background: rgba(255, 255, 255, 0.07);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 5px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            list-style-type: none;
+            font-size: 28px;
+            text-align: left;
+        }
+        #area {
+            background: rgba(255, 255, 255, 0.07);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 5px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            grid-column: 2;
+            margin-bottom: 50px;
+            grid-row: 1;
+            margin-top: 15px;
+            min-height: 30px;
+            min-width: 300px;
+            max-height: 90px;
+            max-width: 300px;
+            font-size: 28px;
+        }
+        #text {
+            display: grid;
+            grid-template-columns: 1fr, 2fr;
+            grid-template-rows: 1fr;
+            height: 130px;
+        }
+        #input1 {
+            grid-column: 1;
+            height: 30px;
+            margin-top: 15px;
+            background: rgba(255, 255, 255, 0.07);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 5px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            grid-row: 1;
+            width: 200px;
+            font-size: 28px;
+        }
+        #input2 {
+            grid-column: 1;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.07);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 5px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            margin: 0;
+            width:200px;
+            font-size: 28px;
+        }
+        #btn {
+            background: rgba(255, 255, 255, 0.07);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 5px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            grid-column: 2;
+            margin-bottom: 50px;
+            grid-row: 2;
+            width: 300px;
+            font-size: 28px;
+        }
+    </style>
+</head>
+<body>
+    <div id="backy">
+        <div id="header">
+            <h1 id="head">Randomizer</h1>
+        </div>
+        <div id="card">
+            <div id="text">
+                <input type="text" placeholder="Min" id="input1">
+                <input type="text" placeholder="Max" id="input2">
+                <textarea type="text" placeholder="Write names" id="area"> </textarea>
+                <button id="btn" onclick="getRandomName()">Add to list</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function getRandomName() {
+            let minInput = document.getElementById('input1');
+            let maxInput = document.getElementById('input2');
+            let textInput = document.getElementById('area');
+            let screen = document.getElementById('head');
+
+            let minVal = minInput.value.trim();
+            let maxVal = maxInput.value.trim();
+            let textVal = textInput.value.trim();
+        if (minVal !== "" && maxVal !== "") {
+            let min = parseInt(minVal);
+            let max = parseInt(maxVal);
+
+            let randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+            screen.innerHTML = `<h4>${randomNumber}</h4>`;
+            minInput.value = "";
+            maxInput.value = "";
+            setTimeout(function() {
+                screen.innerHTML = `<h4>Randomizer</h4>`;
+            }, 25000);
+        }
+        else if (textVal !== "") {
+            let namesArray = textVal.split(',');
+            let randomIndex = Math.floor(Math.random() * namesArray.length);
+            let winner = namesArray[randomIndex].trim();
+            screen.innerHTML = `<h4>${winner}</h4>`;
+            setTimeout(function() {
+                screen.innerHTML = `<h4>Randomizer</h4>`;
+                textInput.value = "";
+            }, 25000);
+            textVal.value = "";
+        }
+        else {
+            screen.innerHTML = `<h4>Заполните поля!</h4>`;
+            setTimeout(function() {
+                screen.innerHTML = `<h4>Randomizer</h4>`;
+            }, 5000);
+        }
+        }
+    </script>
+</body>
+</html>
